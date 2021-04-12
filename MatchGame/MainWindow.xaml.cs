@@ -53,17 +53,19 @@ namespace MatchGame
 
             foreach (TextBlock textBlock in mainGrid.Children.OfType<TextBlock>())
             {
-                textBlock.Visibility = Visibility.Visible;
-                int index = random.Next(animalEmoji.Count);
-                string nextEmoji = animalEmoji[index];
-                textBlock.Text = nextEmoji;
-                animalEmoji.RemoveAt(index);
+                if (textBlock.Name != "timeTextBlock")
+                {
+                    textBlock.Visibility = Visibility.Visible;
+                    int index = random.Next(animalEmoji.Count);
+                    string nextEmoji = animalEmoji[index];
+                    textBlock.Text = nextEmoji;
+                    animalEmoji.RemoveAt(index);
+                }
             }
-        }
 
-        private void SomeMethod()
-        {
-
+            tenthsOfSecondsElapsed = 0;
+            matchesFound = 0;
+            timer.Start();
         }
 
         private TextBlock lastTextBlockClicked;
@@ -83,6 +85,7 @@ namespace MatchGame
             {
                 textBlock.Visibility = Visibility.Hidden;
                 findingMath = false;
+                matchesFound++;
             }
             else
             {
